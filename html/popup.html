@@ -1,0 +1,41 @@
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        position: relative;
+        margin-left: auto;
+        width: 400px;
+        max-width: 800px;
+        min-width: 400px;
+        padding: 30px 30px 60px 30px;
+      }
+      .button {
+        float: right;
+        margin-top: 20px;
+      }
+      .form {
+        clear: both;
+      }
+    </style>
+  </head>
+  <body>
+    <form class="form" action="#">
+      <p>问题上报微信：17717820702</p>
+      <p><b>请输入创联职教云用户信息</b></p>
+      <label for="name">用户名</label>
+      <input type="text" style="width: 150px;" id="name">
+      <label for="password">密码</label>
+      <input type="password" style="width: 150px;" id="password">
+      <input type="button" class="button" id="buttonLogin" value="保存">
+    </form>
+    <form class="form"  style="padding-top: 1px;"  action="#">
+      <p><b>请输入登录后重定向地址</b></p>
+      <label for="reload">url地址</label>
+      <input type="text" style="width: 330px;" id="reload">
+      <input type="button" class="button" id="buttonReload" value="保存">
+    </form>
+    <script src="/js/popup.js"></script>
+  </body>
+</html>

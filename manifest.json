@@ -1,0 +1,94 @@
+{
+  "manifest_version": 2,
+  "version": "1.0.0",
+  "name": "happy-play",
+  "short_name": "__HAPPY_PLAY__",
+  "description": "自动播放",
+  "default_locale": "zh_CN",
+  // 新增popup弹框
+  "browser_action": {
+    "default_popup": "html/popup.html",
+    "default_icon": "statics/images/logo.png"
+  },
+  // 新增命令
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "MacCtrl+Shift+F"
+      },
+      "description": "Opens popup.html"
+    }
+  },
+  "background": {
+    // "page": "background.html",
+    "scripts": ["js/background.js"],
+    "persistent": true
+  },
+  // 插件配置页
+	"options_ui": {
+		"page": "html/options.html",
+		// 添加官方的默认样式，推荐使用
+		"chrome_style": true
+	},
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "all_frames": false,
+      // 必需。指定此内容脚本将被注入到哪些页面。
+      "matches": [
+        "*://shzyjn.chinahrt.com/userStudyResource/studyResourceDetailInfo?*"
+      ],
+      // "css": ["myStyles.css"],
+      "js": ["js/content-script-main.js"]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": false,
+      // 必需。指定此内容脚本将被注入到哪些页面。
+      "matches": [
+        "*://shzyjn.chinahrt.com/userStudyResource/studyResourceDetailInfo?*",
+        "*://videoadmin.chinahrt.com/videoPlay/play?*"
+      ],
+      // "css": ["myStyles.css"],
+      "js": ["js/content-script-time.js"]
+    },
+    {
+      "run_at": "document_end",
+      "all_frames": false,
+      // 必需。指定此内容脚本将被注入到哪些页面。
+      "matches": [
+        "*://videoadmin.chinahrt.com/videoPlay/play?*"
+      ],
+      // "css": ["myStyles.css"],
+      "js": [
+        "js/content-script-sub.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "all_frames": false,
+      // 必需。指定此内容脚本将被注入到哪些页面。
+      "matches": [
+        "*://shzyjn.chinahrt.com/user/login"
+      ],
+      // "css": ["myStyles.css"],
+      "js": [
+        "js/content-script-login.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": false,
+      // 必需。指定此内容脚本将被注入到哪些页面。
+      "matches": [
+        "*://shzyjn.chinahrt.com/userStudyResource/myClass"
+      ],
+      // "css": ["myStyles.css"],
+      "js": ["js/content-script-reload.js"]
+    }
+  ],
+  // 普通页面能够直接访问的插件资源列表，如果不设置是无法直接访问的
+  "web_accessible_resources": ["js/injected-script.js"],
+  "permissions": ["storage", "declarativeContent", "activeTab"]
+}
